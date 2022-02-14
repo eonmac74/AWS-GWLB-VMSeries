@@ -5,18 +5,19 @@
 # 1 Transit Gateway Attachment
 # ---------------------------------------------------------------------------------------------------------------------
 
-data "aws_ec2_transit_gateway" "panw-tgw"{
+data "aws_ec2_transit_gateway" "panw-tgw" {
   id = var.transit_gw_id
 }
 
 resource "aws_ec2_transit_gateway_vpc_attachment" "as" {
-  subnet_ids = aws_subnet.sec_tgwa_subnet[*].id
-  transit_gateway_id = data.aws_ec2_transit_gateway.panw-tgw.id
-  vpc_id = aws_vpc.sec_vpc.id
+  subnet_ids                                      = aws_subnet.sec_tgwa_subnet[*].id
+  transit_gateway_id                              = data.aws_ec2_transit_gateway.panw-tgw.id
+  vpc_id                                          = aws_vpc.sec_vpc.id
   transit_gateway_default_route_table_association = "false"
   transit_gateway_default_route_table_propagation = "false"
   tags = {
-    Name = "security-tgwa-${random_id.deployment_id.hex}"
+    Name      = "security-tgwa-${random_id.deployment_id.hex}"
+    yor_trace = "2b625612-955d-48dd-8bd7-6ab73f4009c7"
   }
   depends_on = [aws_subnet.sec_tgwa_subnet]
 }
@@ -24,7 +25,8 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "as" {
 resource "aws_ec2_transit_gateway_route_table" "tgw-main-sec-rt" {
   transit_gateway_id = data.aws_ec2_transit_gateway.panw-tgw.id
   tags = {
-    Name = "tgw-sec-rt-${random_id.deployment_id.hex}"
+    Name      = "tgw-sec-rt-${random_id.deployment_id.hex}"
+    yor_trace = "007f4a6a-66bd-480b-85eb-e532eb5ece8b"
   }
 }
 

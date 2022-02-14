@@ -22,7 +22,7 @@ resource "aws_security_group" "app-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-    ingress {
+  ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
@@ -36,14 +36,15 @@ resource "aws_security_group" "app-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
     ipv6_cidr_blocks = ["::/0"]
   }
 
   tags = {
-    Name = "app-sg-${random_id.deployment_id.hex}"
+    Name      = "app-sg-${random_id.deployment_id.hex}"
+    yor_trace = "5b1e6262-b040-4d86-a00e-86bdbbfa33e8"
   }
 
   depends_on = [aws_vpc.app_vpc]

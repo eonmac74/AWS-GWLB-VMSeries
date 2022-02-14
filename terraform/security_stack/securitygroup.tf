@@ -23,7 +23,8 @@ resource "aws_security_group" "fw-mgmt-sg" {
   }
 
   tags = {
-    Name = "fw-mgmt-sg-${random_id.deployment_id.hex}"
+    Name      = "fw-mgmt-sg-${random_id.deployment_id.hex}"
+    yor_trace = "23820905-24b2-4401-9686-6e030befc34d"
   }
 
   depends_on = [aws_vpc.sec_vpc]
@@ -56,7 +57,8 @@ resource "aws_security_group" "fw-data-sg" {
   }
 
   tags = {
-    Name = "fw-data-sg-${random_id.deployment_id.hex}"
+    Name      = "fw-data-sg-${random_id.deployment_id.hex}"
+    yor_trace = "8a249bec-d0d1-4957-91eb-c06efdad12de"
   }
 
   depends_on = [aws_vpc.sec_vpc]
